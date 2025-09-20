@@ -2,14 +2,14 @@ import NavBar from "./NavBar"
 import SignUp from "./SignUp"
 import SignIn from "./SignIn"
 import Home from "./Home"
+import {Routes,Route} from "react-router-dom" 
 function App() {
   return (
-    <div >
-       <NavBar/>
-      {/* <SignUp/>  */}
-        {/* <SignIn/>  */}
-        <Home/> 
-    </div>
+    <Routes>
+      <Route path="/SignUp" element={< SignUp/>}/>
+      <Route path="/SignIn" element={< SignIn/>}/>
+      <Route path="/Home" element={< Home/>}/>
+    </Routes>
   )
 }
 export default App
