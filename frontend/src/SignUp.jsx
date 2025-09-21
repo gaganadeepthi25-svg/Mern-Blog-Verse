@@ -43,7 +43,7 @@ const SignUp = () => {
         } else if (formData.password !== formData.conformPassword) {
             newErrors.conformPassword = "your password is not matched"
         }
-        console.log(newErrors);
+        
         
         if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors)
@@ -104,9 +104,9 @@ const SignUp = () => {
     return (
         <div className="flex items-center flex-col min-h-screen bg-gray-100 gap-5   ">
             <NavBar />
-            <h1 className=" text-2xl text-blue-600 font-bold ">Join Blog Verse</h1>
-            <p className="text-xl text-gray-500 text-center font-semibold">Create your account and <br></br> start your Blogging journey today</p>
-            <form onSubmit={handleSubmit} className="flex flex-col border-1 border-black w-1/4 py-5 bg-white items-center rounded-xl gap-5">
+            <h1 className=" text-2xl md:text-3xl text-blue-600 font-bold ">Join Blog Verse</h1>
+            <p className=" text-lg md:text-xl text-gray-500 text-center font-semibold">Create your account and <br></br> start your Blogging journey today</p>
+            <form onSubmit={handleSubmit} className="flex flex-col border-1 border-black w-[95%] lg:w-1/4 md:w-[60%] md:py-5 bg-white items-center rounded-xl gap-5">
                 <div className="w-[90%] flex flex-col gap-2  relative">
                     <p className="text-md text-gray-700 font-semibold">Full Name</p>
                     <input value={formData.fullName} onChange={handleChange} type="text" name="fullName" placeholder="Enter your full name"
@@ -144,8 +144,8 @@ const SignUp = () => {
                 </div>
                 {errors.conformPassword && <p className="text-red-500">{errors.conformPassword}</p>}
                 <div className="flex gap-2 border-1 border-gray-800 py-3 w-[90%] rounded-xl items-center justify-center">
-                    <input type="checkbox" name="" id="" className="h-4 w-4" />
-                    <p className="font-semibold text-gray-800">
+                    <input type="checkbox" name="" id="" className=" ml-2 h-4 w-4" />
+                    <p className="font-semibold text-sm text-gray-800">
                         I agree to the Terms of Services and Privacy Policy
                     </p>
                 </div>
@@ -154,7 +154,7 @@ const SignUp = () => {
                 <button type="submit" className="w-[90%] flex justify-center gap-2 bg-purple-500 font-semibold rounded-xl py-2 text-white hover:bg-purple-700 cursor-pointer"><CircleUser /><p>Create Acount</p></button>
                 <div className="border-1 border-gray-400 w-[90%]"></div>
                 <p className="font-semibold">Already have an account? <Link to="/SignIn" className="text-purple-500 hover:underline cursor-pointer">Sign In</Link></p>
-                <Link to="/Home" className="text-gray-700 font-semibold pl-5.5 hover:bg-gray-400 rounded-xl  py-2 w-[30%] cursor-pointer">Back to Home</Link>
+                <Link to="/Home" className="text-gray-700  w-[40%] text-sm font-semibold pl-4 md:w-[25%] md:pl-3 md:text-md lg:w-[50%] lg:pl-5.5 lg:text-md xl:w-[35%] xl:pl-4.5 hover:bg-gray-400 rounded-xl  py-2 cursor-pointer">Back to Home</Link>
             </form>
         </div>
     )

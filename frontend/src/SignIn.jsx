@@ -12,10 +12,11 @@ const SignIn = () => {
      const handlePassword=()=>{
           setShowPassword((password)=>!password);
     }
+
     return (
         <div className=" flex flex-col items-center min-h-screen bg-gray-100     gap-5">
             <NavBar/>
-            <form className=" border-1 border-black w-[20%] pt-5 pb-5 gap-5 mt-40 rounded-2xl bg-white">
+            <form className=" border-1 border-black w-[90%] md:[70%] lg:w-[20%] pt-5 pb-5 gap-5 mt-20 md:mt-40 rounded-2xl bg-white">
                 <div className=" flex flex-col items-center gap-2">
                     <h1 className="text-2xl font-bold">Sign In</h1>
                     <p className=" text-gray-500">Access your account</p></div>
@@ -33,9 +34,9 @@ const SignIn = () => {
                         
                         <p onClick={handlePassword}>{ showPassword ? <Eye className="absolute top-12 right-12  size-6 text-gray-600 pt-1 hover:text-gray-800 cursor-pointer "/> : <EyeOff className="absolute top-12 right-12  size-6 text-gray-600 pt-1  hover:text-gray-800 cursor-pointer"/> }</p>
                 </div>
-                <div className="flex justify-around  px-10 mt-5">
-                    <div className="flex justify-center items-center gap-1"> <input type="checkbox" className="h-4 w-4 " />
-                        <p classname="font-semibold  text-gray-800">
+                <div className="flex justify-around text-sm lg:text-md lg:font-semibold pl-10 lg:px-10 lg:mt-5">
+                    <div className="flex justify-center items-center gap-2 lg:gap-1"> <input type="checkbox" className="h-4 w-4 " />
+                        <p classname="font-semibold text-gray-800">
                             Remember me
                         </p>
                     </div>
@@ -43,9 +44,9 @@ const SignIn = () => {
                         <button className=" text-blue-700  px-5 py-2 rounded-xl hover:underline  cursor-pointer">Forget Password?</button>
                     </div>
                 </div>
-                <div className="px-10 mt-4 ">
+                <div className="lg:px-10 lg:mt-4 text-sm lg:text-md lg:font-semibold px-10 mt-4  ">
                     <button className="w-[100%] bg-blue-600 font-semibold rounded-xl py-3 px-2  text-white hover:bg-blue-700 cursor-pointer">Sign in</button>
-                    <div className="border-1 border-gray-400 mt-5"></div>
+                    <div className="border-1 border-gray-400 lg:w-full  mt-5"></div>
                     <p className="text-gray-600  flex justify-center mt-5 gap-2">Dont have an account? <span className="text-blue-700 hover:underline cursor-pointer"> Create one here</span>
                     </p>
                 </div>

@@ -67,10 +67,10 @@ const Home = () => {
             <NavBar />
             <h1 className="text-4xl font-bold">Welcome to BlogVerse</h1>
             <p className="text-gray-700 text-xl text-center ">Discover amazing stories,insights,and idea from our community of <br></br> writers.<button className="text-blue-500 hover:underline cursor-pointer ">Sign in</button> to create your own posts and save your favorites.</p>
-            <div className=" grid-cols-3 grid ">
+            <div className=" grid-cols-3 grid   ">
                 {
-                    Blogs.map((Blog) => (<div className=" border-1 border-gray-400 mb-5 ml-30 mt-10 rounded-2xl w-[60%]">
-                       
+                    Blogs.map((Blog) => (<div className=" border-1  border-gray-400 mb-5 ml-30 mt-10 rounded-2xl w-[60%]">
+                         {/* <div className="w-96 bg-white shadow-lg rounded-lg" key={Blog.id}> </div> */}
                         <div className="relative">
                             <img className=" rounded-t-2xl " src={Blog.Image} alt="Writing" />
                             <button className="absolute right-4 top-3 bg-white rounded-xl px-0.5 cursor-pointer">Save</button>
