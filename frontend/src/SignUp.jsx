@@ -2,11 +2,10 @@ import NavBar from "./NavBar"
 import { Link } from "react-router-dom"
 import { CircleUser } from 'lucide-react';
 import { LockKeyhole } from 'lucide-react';
-import { UserRound } from 'lucide-react';
-import { Mail } from 'lucide-react';
 import { Eye } from 'lucide-react';
 import { EyeOff } from 'lucide-react';
 import { useState } from "react";
+import React from "react"
 
 const SignUp = () => {
     const [formData, setFormData] = useState({
@@ -90,7 +89,6 @@ const SignUp = () => {
         setError("")
         setSuccess("")
 
-
         setFormData((formData) => ({
             ...formData,
             [event.target.name]: event.target.value
@@ -102,58 +100,84 @@ const SignUp = () => {
     }
 
     return (
-        <div className="flex items-center flex-col min-h-screen bg-gray-100 gap-5   ">
+        <div className="flex items-center flex-col gap-5   ">
             <NavBar />
-            <h1 className=" text-2xl md:text-3xl text-blue-600 font-bold ">Join Blog Verse</h1>
-            <p className=" text-lg md:text-xl text-gray-500 text-center font-semibold">Create your account and <br></br> start your Blogging journey today</p>
-            <form onSubmit={handleSubmit} className="flex flex-col border-1 border-black w-[95%] lg:w-1/4 md:w-[60%] md:py-5 bg-white items-center rounded-xl gap-5">
-                <div className="w-[90%] flex flex-col gap-2  relative">
+            <h1 className=" text-2xl text-blue-600 font-bold ">Join BlogVerse</h1>
+            <p className=" text-sm md:text-xl text-gray-600 text-center font-semibold">Create your account and <br></br> start your Blogging journey today</p>
+            <form onSubmit={handleSubmit} className="flex flex-col border-1 border-gray-400 w-[90%] sm:w-[50%] lg:w-1/3 py-7 items-center gap-5 mb-5 rounded-2xl">
+
+                <div className="w-[90%] flex flex-col gap-2 ">
                     <p className="text-md text-gray-700 font-semibold">Full Name</p>
-                    <input value={formData.fullName} onChange={handleChange} type="text" name="fullName" placeholder="Enter your full name"
-                        className="border-1 border-gray-700 pb-2 w-full px-8 py-2 rounded-2xl focus:outline-none focus:border-blue-500 " />
-                    <UserRound className=" absolute top-10 left-2  text-gray-600 size-5 pt-1" />
-                    
+                    <input 
+                        value={formData.fullName}
+                        onChange={handleChange} 
+                        type="text" 
+                        name="fullName" 
+                        placeholder="Enter your full name"
+                        className="border-1 border-gray-700 w-full px-3 py-4 rounded-xl focus:outline-none focus:border-blue-500 " 
+                    />
+                    {errors.fullName && <p className="text-red-500">{errors.fullName}</p>}
                 </div>
-                {errors.fullName && <p className="text-red-500">{errors.fullName}</p>}
-                <div className="w-[90%] flex flex-col gap-2 relative">
+
+                <div className="w-[90%] flex flex-col gap-2">
                     <p className="text-md text-gray-700 font-semibold">Email</p>
-                    <input value={formData.email} onChange={handleChange} type="email" name="email" placeholder="Enter your email"
-                        className="border-1 border-gray-700 w-full px-8 py-2 rounded-2xl focus:outline-none focus:border-blue-500 " />
-                    <Mail className="absolute top-10 left-2 text-gray-600 size-5 pt-1" />
-                    
+                    <input 
+                        value={formData.email} 
+                        onChange={handleChange} 
+                        type="email" 
+                        name="email" 
+                        placeholder="Enter your email"
+                        className="border-1 border-gray-700 w-full px-3 py-4 rounded-xl focus:outline-none focus:border-blue-500 " 
+                    />
+                    {errors.email && <p className="text-red-500">{errors.email}</p>}    
                 </div>
-                {errors.email && <p className="text-red-500">{errors.email}</p>}
-                <div className="w-[90%] flex flex-col gap-2 relative">
+                
+                <div className="w-[90%] flex flex-col gap-2">
                     <p className="text-md text-gray-700 font-semibold">Password</p>
-                    <input value={formData.password} onChange={handleChange} type={showPassword ? "password" : "text"} name="password" placeholder="Enter your password"
-                        className="border-1 border-gray-700  w-full px-8 py-2 rounded-2xl focus:outline-none focus:border-blue-500 " />
-                    < LockKeyhole className="absolute top-10  text-gray-600 left-2 size-5 pt-1 " />
-                    <p onClick={handlePassword}>{showPassword ? <Eye className="absolute top-10 right-2  size-6 text-gray-600 pt-1 hover:text-gray-800 cursor-pointer " /> : <EyeOff className="absolute top-10 right-2  size-6 text-gray-600 pt-1  hover:text-gray-800 cursor-pointer" />}</p>
+                    <div className="relative">
+                        <input 
+                       value={formData.password} 
+                       onChange={handleChange} 
+                       type={showPassword ? "password" : "text"} 
+                       name="password" 
+                       placeholder="Enter your password"
+                       className="pl-12 border-1 border-gray-700 w-full py-4 px-3 rounded-xl focus:outline-none focus:border-blue-500 " 
+                       />
+                       < LockKeyhole className="text-gray-500 absolute top-4 left-3" />
+                       <p onClick={handlePassword}>{showPassword ? <Eye className="absolute right-3 top-4 text-gray-500" /> : <EyeOff className="absolute top-4 right-3 text-gray-500" />}</p>
 
+                    </div>
+                    {errors.password && <p className="text-red-500">{errors.password}</p>}
                 </div>
-                {errors.password && <p className="text-red-500">{errors.password}</p>}
-                <div className="w-[90%] flex flex-col gap-2 relative">
+                
+                <div className="w-[90%] flex flex-col gap-2">
                     <p className="text-md text-gray-700 font-semibold">Conform Password</p>
-
-                    <input value={formData.conformPassword} onChange={handleChange} type={showConformPassword ? "password" : "text"} name="conformPassword" placeholder="Conform your password"
-                        className="border-1 border-gray-700 w-full px-8 py-2 rounded-2xl focus:outline-none focus:border-blue-500 " />
-                    < LockKeyhole className="absolute top-10 left-2  text-gray-600 size-5 pt-1 " />
-                    <p onClick={handleConformPassword}>{showConformPassword ? <Eye className="absolute  top-10 right-2 size-6 text-gray-500 pt-1  hover:text-gray-800 cursor-pointer" /> : <EyeOff className="absolute top-10 right-2  size-6 text-gray-600 pt-1  hover:text-gray-800 cursor-pointer" />}</p>
-
-
+                    <div className="relative">
+                        <input 
+                       value={formData.conformPassword} 
+                       onChange={handleChange} 
+                       type={showConformPassword ? "password" : "text"} 
+                       name="conformPassword" 
+                       placeholder="Conform your password"
+                       className="pl-12 border-1 border-gray-700 w-full px-3 py-4 rounded-xl focus:outline-none focus:border-blue-500 " 
+                    />
+                    < LockKeyhole className="absolute top-4 left-3  text-gray-500" />
+                    <p onClick={handleConformPassword}>{showConformPassword ? <Eye className="absolute  top-4 right-3 size-6 text-gray-500" /> : <EyeOff className="absolute top-4 right-3 text-gray-500" />}</p>
+                    </div>   
+                    {errors.conformPassword && <p className="text-red-500">{errors.conformPassword}</p>}
                 </div>
-                {errors.conformPassword && <p className="text-red-500">{errors.conformPassword}</p>}
-                <div className="flex gap-2 border-1 border-gray-800 py-3 w-[90%] rounded-xl items-center justify-center">
-                    <input type="checkbox" name="" id="" className=" ml-2 h-4 w-4" />
-                    <p className="font-semibold text-sm text-gray-800">
+               
+                <div className="flex gap-2 border-1 border-gray-800 py-5 px-4 w-[90%] rounded-xl items-center justify-center">
+                    <input type="checkbox" name="" id="" className="h-5 w-5" />
+                    <p>
                         I agree to the Terms of Services and Privacy Policy
                     </p>
                 </div>
                 {error && <p className="text-red-400">{error}</p>}
                 {success && <p className="text-green-500">{success}</p>}
-                <button type="submit" className="w-[90%] flex justify-center gap-2 bg-purple-500 font-semibold rounded-xl py-2 text-white hover:bg-purple-700 cursor-pointer"><CircleUser /><p>Create Acount</p></button>
-                <div className="border-1 border-gray-400 w-[90%]"></div>
-                <p className="font-semibold">Already have an account? <Link to="/SignIn" className="text-purple-500 hover:underline cursor-pointer">Sign In</Link></p>
+                <button type="submit" className="w-[90%] flex justify-center bg-purple-500 font-semibold gap-3 rounded-xl py-4 text-white"><CircleUser className=" h-7 w-7 "/><p>Create Acount</p></button>
+                <div className="border-[0.5px] border-gray-400 w-[90%] mt-4"></div>
+                <p className="text-gray-700 font-semibold">Already have an account? <Link to="/SignIn" className="text-purple-500">Sign In</Link></p>
                 <Link to="/" className="text-gray-700  w-[40%] text-sm font-semibold pl-4 md:w-[30%] md:pl-3 md:text-md lg:w-[50%] lg:pl-5.5  lg:text-md xl:w-[35%] xl:pl-10 hover:bg-gray-400 rounded-xl  py-2 cursor-pointer">Back to Home</Link>
             </form>
         </div>

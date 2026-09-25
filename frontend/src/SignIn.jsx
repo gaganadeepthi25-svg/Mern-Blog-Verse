@@ -1,60 +1,99 @@
-import NavBar from "./NavBar"
-import { LockKeyhole } from 'lucide-react';
-import { Mail } from 'lucide-react';
-import { Eye } from 'lucide-react';
-import { EyeOff } from 'lucide-react';
-import { useState } from "react";
+import React, { useState } from 'react'
+import NavBar from './NavBar'
+import { Link } from 'react-router-dom'
+import { KeyRound, Mail, Eye, EyeOff } from 'lucide-react'
 
+const SignIn= () => {
+  const [formData, setFormData] = useState({ email: '', password: '' });
+  const [errors, setErrors] = useState({ email: '', password: '' });
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
+  const handleChange = (e) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setErrors((prev) => ({ ...prev, [e.target.name]: '' }));
+    setError('');
+    setSuccess('');
+  };
 
-const SignIn = () => {
-    const [showPassword,setShowPassword]=useState(false);
-     const handlePassword=()=>{
-          setShowPassword((password)=>!password);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let newErrors = {};
+    if (!formData.email) newErrors.email = 'Please enter your email';
+    if (!formData.password) newErrors.password = 'Please enter your password';
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
     }
 
-    return (
-        <div className=" flex flex-col items-center min-h-screen bg-gray-100     gap-5">
-            <NavBar/>
-            <form className=" border-1 border-black w-[90%] md:[70%] lg:w-[20%] pt-5 pb-5 gap-5 mt-20 md:mt-40 rounded-2xl bg-white">
-                <div className=" flex flex-col items-center gap-2">
-                    <h1 className="text-2xl font-bold">Sign In</h1>
-                    <p className=" text-gray-500">Access your account</p></div>
-                <div className="w-[100%] flex flex-col gap-2 px-10 mt-6 relative">
-                    <p className="text-md text-gray-700 font-semibold">Email Address</p>
-                    <input type="email" placeholder="Sample@gmail.com"
-                        className="border-1 border-gray-700 w-full px-4 pl-8 py-4 rounded-xl focus:outline-none focus:border-blue-500 " />
-                          <Mail className="absolute top-12 left-12 size-6 text-gray-600 pt-1 " />
-                </div>
-                <div className="w-[100%] flex flex-col gap-2 px-10 mt-6 relative">
-                    <p className="text-md text-gray-700 font-semibold">Password</p>
-                    <input type={showPassword ? "password":"text"}  placeholder="Sample123"
-                        className="border-1 border-gray-700 w-full px-4 pl-8 py-4 rounded-xl focus:outline-none focus:border-blue-500 " />
-                      < LockKeyhole className="absolute top-12  text-gray-600 left-12 size-5 pt-1 " />
-                        
-                        <p onClick={handlePassword}>{ showPassword ? <Eye className="absolute top-12 right-12  size-6 text-gray-600 pt-1 hover:text-gray-800 cursor-pointer "/> : <EyeOff className="absolute top-12 right-12  size-6 text-gray-600 pt-1  hover:text-gray-800 cursor-pointer"/> }</p>
-                </div>
-                <div className="flex justify-around text-sm lg:text-md lg:font-semibold pl-10 lg:px-10 lg:mt-5">
-                    <div className="flex justify-center items-center gap-2 lg:gap-1"> <input type="checkbox" className="h-4 w-4 " />
-                        <p classname="font-semibold text-gray-800">
-                            Remember me
-                        </p>
-                    </div>
-                    <div>
-                        <button className=" text-blue-700  px-5 py-2 rounded-xl hover:underline  cursor-pointer">Forget Password?</button>
-                    </div>
-                </div>
-                <div className="lg:px-10 lg:mt-4 text-sm lg:text-md lg:font-semibold px-10 mt-4  ">
-                    <button className="w-[100%] bg-blue-600 font-semibold rounded-xl py-3 px-2  text-white hover:bg-blue-700 cursor-pointer">Sign in</button>
-                    <div className="border-1 border-gray-400 lg:w-full  mt-5"></div>
-                    <p className="text-gray-600  flex justify-center mt-5 gap-2">Dont have an account? <span className="text-blue-700 hover:underline cursor-pointer"> Create one here</span>
-                    </p>
-                </div>
+    // Placeholder success behaviour - replace with real auth call
+    setSuccess('Signed in successfully');
+  };
 
+  const toggleShowPassword = () => setShowPassword((p) => !p);
 
+  return (
+    <div className='flex flex-col items-center'>
+      <NavBar />
+      <div className='w-[90%] md:w-1/3  flex  flex-col items-center mt-10 gap-2 border-1 border-gray-300  rounded-2xl shadow-2xl'>
+        <h1 className='mt-5 text-xl font-bold'>Sign In</h1>
+        <p className='text-sm text-gray-700'>Access your account</p>
+        <form onSubmit={handleSubmit} className='w-[80%] my-5'>
+          <div className='w-[95%] mb-4'>
+            <p className='text-sm text-gray-700 font-semibold pb-1.5 '>Email Address</p>
+            <div className='flex relative'>
+              <input
+                name='email'
+                value={formData.email}
+                onChange={handleChange}
+                className='border-1 border-gray-300 bg-gray-50 w-full  rounded-md py-3 px-12 focus:outline-none focus:border-black focus:border-1.8 text-sm duration-200'
+                type='text'
+                placeholder='sample123@gmail.com'
+              />
+              <Mail className='absolute top-3 w-5 h-5 left-3 text-gray-400' />
+            </div>
+            {errors.email && <p className='text-red-500 text-sm mt-1'>{errors.email}</p>}
 
-            </form>
-        </div>
-    )
+          </div>
+          <div className='w-[95%] '>
+            <p className='text-sm text-gray-700 font-semibold pb-1.5'>Password</p>
+            <div className='flex relative'>
+              <input
+                name='password'
+                value={formData.password}
+                onChange={handleChange}
+                className='border-1 border-gray-300 bg-gray-50 w-full  rounded-md py-3 px-12 focus:outline-none focus:border-black focus:border-1.8 text-sm duration-200'
+                type={showPassword ? 'text' : 'password'}
+                placeholder='sample123'
+              />
+              <KeyRound className='absolute top-3 w-5 h-5 left-3 text-gray-400' />
+              <button type='button' onClick={toggleShowPassword} className='absolute right-3 top-2.5'>
+                {showPassword ? <Eye className='w-5 h-5 text-gray-500' /> : <EyeOff className='w-5 h-5 text-gray-500' />}
+              </button>
+            </div>
+            {errors.password && <p className='text-red-500 text-sm mt-1'>{errors.password}</p>}
+          </div >
+          <div className='flex justify-between gap-3 w-full mt-4'>
+            <div className='flex  gap-1'>
+              <input type='checkbox' />
+              <p className='text-sm text-gray-800 font-semibold '>Remember me</p>
+            </div>
+            <div className=''>
+              <p className='text-sm text-blue-600 font-semibold hover:cursor-pointer'>Forgot Password?</p>
+            </div>
+          </div>
+          {error && <p className='text-red-500 mt-3'>{error}</p>}
+          {success && <p className='text-green-500 mt-3'>{success}</p>}
+          <button className='w-full mt-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 duration-200'>Sign In</button>
+          <div className='w-full flex justify-center my-4 border-1 border-gray-200 '></div>
+
+          <p className='text-sm text-center text-gray-700'>Don't have an account?<Link to="/signup" className='text-blue-600 font-semibold hover:cursor-pointer'>Create one here</Link></p>
+        </form>
+      </div>
+    </div>
+  )
 }
-export default SignIn 
+
+export default SignIn

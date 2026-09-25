@@ -3,7 +3,6 @@ const Home = () => {
     const Blogs = [{
         id: 1,
         profile: 'Sarah Johnson',
-        about:'Technology',
         title: 'Getting Started with React and Tailwind CSS',
         timeRead: " 5 min read",
         postedOn: "2 hours ago",
@@ -13,7 +12,6 @@ const Home = () => {
     }, {
         id: 2,
         profile: 'Michael Chen',
-         about:'Technology',
         title: 'The Future of Web Development',
         timeRead: " 8 min read",
         postedOn: "5 hours ago",
@@ -23,7 +21,6 @@ const Home = () => {
     }, {
         id: 3,
         profile: 'Emily Rodriguez',
-         about:'Lifestyle',
         title: 'Mindful Living in a Digital Age',
         timeRead: " 6 min read",
         postedOn: "1 day ago",
@@ -33,7 +30,6 @@ const Home = () => {
     }, {
         id: 4,
         profile: 'David Kim',
-          about:'Backend',
         title: 'Building Scalable Node.js Applications',
         timeRead: " 12 min read",
         postedOn: "2 days ago",
@@ -43,7 +39,6 @@ const Home = () => {
     }, {
         id: 5,
         profile: 'Lisa Park',
-          about:'Design',
         title: 'Design Systems: A Complete Guide',
         timeRead: " 10 min read",
         postedOn: "3 days ago",
@@ -53,7 +48,6 @@ const Home = () => {
     }, {
         id: 6,
         profile: 'Alex Thompson',
-          about:'AI & ML',
         title: 'Introduction to Machine Learning',
         timeRead: " 15 min read",
         postedOn: "10 days ago",
@@ -63,40 +57,40 @@ const Home = () => {
     },
     ]
     return (
-        <div className="flex flex-col items-center gap-5 min-h-screen">
-            <NavBar />
-            <h1 className="text-4xl font-bold">Welcome to BlogVerse</h1>
-            <p className="text-gray-700 text-xl text-center ">Discover amazing stories,insights,and idea from our community of <br></br> writers.<button className="text-blue-500 hover:underline cursor-pointer ">Sign in</button> to create your own posts and save your favorites.</p>
-            <div className=" grid-cols-3 grid   ">
+        <div className="min-h-screen flex flex-col items-center bg-gray-50">
+            <NavBar/>
+            <p className="text-4xl pt-5 font-bold">Welcome to BlogVerse</p>
+            <p className="text-lg text-gray-500 mt-4">Discover amazing stories,insights,and idea from our community of writers.</p>
+            <div className=" flex gap-10 justify-around mt-5 ">
+                <button className="px-10 py-4 cursor-pointer bg-blue-700 hover:bg-blue-900 shadow-md text-white rounded-md">Write a New Post</button>
+                <button className="px-10 py-4 cursor-pointer bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-md" >View My Posts</button>
+            </div>
+
+            <div className="mt-5 flex gap-10 flex-wrap justify-center w-full rounded-lg shadow-lg pb-5">
                 {
-                    Blogs.map((Blog) => (<div className=" border-1  border-gray-400 mb-5 ml-30 mt-10 rounded-2xl w-[60%]">
-                         {/* <div className="w-96 bg-white shadow-lg rounded-lg" key={Blog.id}> </div> */}
-                        <div className="relative">
-                            <img className=" rounded-t-2xl " src={Blog.Image} alt="Writing" />
-                            <button className="absolute right-4 top-3 bg-white rounded-xl px-0.5 cursor-pointer">Save</button>
-                            <button className="absolute right-4 top-3 h-6 w-25 left-2 bg-blue-700 text-sm font-bold text-white rounded-xl px-0.5 cursor-pointer">{Blog.about}</button>
-                        </div>
-                        <div className="flex items-center p-2 px-4 gap-3">
-                            <img className="rounded-full h-10 w-10 mt-5" src={Blog.profilePic} alt="writing" />
-                            <div className="mt-5">
-                                <p className="font-semibold">{Blog.profile}</p>
-                                <p className="text-sm text-gray-500 ">{Blog.postedOn} -{Blog.timeRead}</p>
+                    Blogs.map((Blog) => (
+                    <div className="w-96 bg-white shadow-lg rounded-lg" key={Blog.id}>
+                            <div className="flex relative">
+                                <img className=" rounded-t-lg  shadow-lg h-52 w-96 " src={Blog.Image} alt="Writing" />
+                                <button className="p-3 text-sm bg-white rounded-full absolute cursor-pointer right-4 top-3">Save</button>
+                            </div>
+                            <div className="flex gap-5 mt-3 px-2">
+                                <img className="rounded-full shadow-lg h-12 w-12 " src={Blog.profilePic} alt="Writing" />
+                                <div>
+                                    <p className="font-semibold">{Blog.profile}</p>
+                                    <p className="text-gray-500">{Blog.postedOn} - {Blog.timeRead}</p>
+                                </div>
+                            </div>
+                            <div className="mt-3 px-3 flex flex-col gap-3">
+                                <p className="text-2xl font-bold ">{Blog.title}</p>
+                                <p className="text-gray-600">
+                                    {Blog.content}
+                                </p>
+                            </div>
+                            <div className="mt-3 mb-3  px-3 flex justify-end">
+                                <button className="text-blue-500 hover:underline cursor-pointer">Read more</button>
                             </div>
                         </div>
-                        <div className="flex flex-col p-2 px-4 ">
-                            <h1 className="text-lg mt-2 text-black font-bold hover:text-blue-600 cursor-pointer">{Blog.title}</h1>
-                            <p className="text-sm text-gray-500">{Blog.content}</p>
-                        </div>
-                        <div className="border-1 text-gray-200 my-2 mx-3 "></div>
-                        <div className="flex justify-between ">
-                        <p className="text-sm text-gray-500 pl-2 ">{Blog.timeRead}</p>
-                        <button className="text-sm text-blue-600 pr-2 mb-5                                                                                                                                   cursor-pointer">Read more</button>
-                        </div>
-
-
-
-                    </div>
-
                     ))
                 }
             </div>
